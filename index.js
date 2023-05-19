@@ -20,7 +20,9 @@ app.use((req, res, next) => {
 });
 
 app.get("/api/characters", (req, res) => res.json(characters));
-app.get("/api/quotes/random", (req, res) => res.json(getRandomQuote()));
+app.get("/api/quotes/random", (req, res) =>
+  res.json({ data: getRandomQuote() })
+);
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
