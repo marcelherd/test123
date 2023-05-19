@@ -19,7 +19,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/api/characters", (req, res) => res.json(characters));
+app.get("/api/characters", (req, res) => res.json({ data: characters }));
 app.get("/api/quotes/random", (req, res) =>
   res.json({ data: getRandomQuote() })
 );
