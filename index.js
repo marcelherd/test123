@@ -1,5 +1,4 @@
 const express = require("express");
-const helmet = require("helmet");
 
 const { characters } = require("./characters");
 const { getRandomQuote } = require("./quotes");
@@ -8,7 +7,17 @@ const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-app.use(helmet());
+app.use((req, res, next) => {
+  res.set({
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "*",
+    "Access-Control-Allow-Methods": "*",
+    "Content-Security-Policy": "default-src *",
+    "X-Content-Security-Policy": "default-src *",
+    "X-WebKit-CSP": "default-src *",
+  });
+  next();
+});
 
 app.get("/api/characters", (req, res) => res.json(characters));
 app.get("/api/quotes/random", (req, res) => res.json(getRandomQuote()));
